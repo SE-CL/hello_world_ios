@@ -1,0 +1,72 @@
+name: Build unsigned iOS IPA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-ios:
+    name: Build iOS release
+    runs-on: macos-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.44.8'
+          channel: stable
+          cache: true
+
+      - name: Show tool versions
+        run: |
+          flutter --version
+          xcodebuild -version
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Analyze source
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build unsigned iOS app
+        run: flutter build ios --release --no-codesign
+
+      - name: Package unsigned IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          output_dir="$GITHUB_WORKSPACE/build/ios/iphoneos"
+          payload_dir="$output_dir/Payload"
+          ipa_path="$output_dir/hello_world_ios-unsigned.ipa"
+
+          test -d "$output_dir/Runner.app"
+          rm -rf "$payload_dir"
+          mkdir -p "$payload_dir"
+          cp -R "$output_dir/Runner.app" "$payload_dir/Runner.app"
+          cd "$output_dir"
+          ditto -c -k --sequesterRsrc --keepParent Payload "$ipa_path"
+
+      - name: Upload unsigned IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello_world_ios-unsigned-ipa
+          path: build/ios/iphoneos/hello_world_ios-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 14
