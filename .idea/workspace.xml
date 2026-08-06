@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d9be834d-08fc-4050-a193-e25a74822e5e" name="更改" comment="1">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/001b64d0f2e38b687bafcbdbcb9ca5ca.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/20ea5a426f7ebde4def2e91b4f91d12d.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/238a810427895bed3e5a65859e4b76ca.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/5ce3862d47d0b0b5a5c883cf09478447.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/67006f8db2b2a8520af906c2fc1b4371.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/6cc1e5c12b22bc5dde0748dfc467ed82.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/6dd3699939f9e4acb1ad9dce3c7c92ee.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/731474a10d8b9d143c298ad747097157.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/8813f96aa3088d1dfe8abebb1ed71477.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/8eeb34308c83281f4c897406c9fa29e4.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/a96ad59d526c2121b8a1cf29fcc3bc5a.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/b1459bffd928b71ad5350124b867972d.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/b667c3ca17d306fe9e21c246db666b98.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/bc0547cdc3046389b1ea08d91e79dfd8.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/bcccf3db90174d932ac3f49d4e342c39.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/d177f3c071a7fc716e0e2a580c71cfb1.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/ea16d9d36917e6f2067d32873127c1ed.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/ee285c344ee158ee86d3b879fa739e94.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/f799c2cd549311e606644705613df87a.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.analysis-driver/feb8cb288d79c33829375d80256f931a.unlinked2-temp-8052" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.localappdata/.dartServer/.instrumentation/uuid.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/hello_world_ios/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Flutter/AppFrameworkInfo.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/Main.storyboard" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Runner-Bridging-Header.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/SceneDelegate.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/RunnerTests/RunnerTests.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/.run/RuleEngineDemoApplication.run.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/db/mysql-init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/rule.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/java/com/example/ruleengine/RuleEngineDemoApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/java/com/example/ruleengine/controller/RuleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/java/com/example/ruleengine/entity/RuleDefinition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/java/com/example/ruleengine/repository/RuleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/java/com/example/ruleengine/service/CalcTaxFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/java/com/example/ruleengine/service/RuleEngineService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/resources/application-mysql.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/main/resources/data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../简历/rule/src/test/java/com/example/ruleengine/RuleControllerIntegrationTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3HXpA0Rioj375dxxcMIn2IghbPj" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Flutter.main.dart.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/code/auto/hello_world_ios",
+    "node.js.detected.package.jshint": "true",
+    "node.js.selected.package.jshint": "",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.41090426",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\code\auto\hello_world_ios\lib" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.65" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.9437.65" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="d9be834d-08fc-4050-a193-e25a74822e5e" name="更改" comment="" />
+      <created>1786024168732</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1786024168732</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
