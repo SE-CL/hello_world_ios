@@ -38,6 +38,18 @@ python -m http.server 8080 --directory build\web
 
 当前项目的最低 iOS 部署版本为 iOS 13.0。
 
+### 自动版本、Release 与邮件
+
+每次推送到 `main`，工作流会使用 GitHub Actions 的递增运行序号作为 iOS 构建号，并创建 GitHub Release，例如 `v1.0.0+2`。Release 会附带对应的无签名 IPA。
+
+如需将 IPA 作为邮件附件自动发送，在仓库的 `Settings` → `Secrets and variables` → `Actions` 创建以下 Secrets：
+
+- `MAIL_USERNAME`：QQ 邮箱地址，例如 `123456@qq.com`
+- `MAIL_PASSWORD`：QQ 邮箱的 SMTP 授权码，不是 QQ 登录密码
+- `MAIL_TO`：接收 IPA 的一个或多个邮箱地址，多个地址用逗号分隔
+
+没有配置这些 Secrets 时，邮件步骤会自动跳过，IPA 构建、Artifact 和 GitHub Release 不受影响。
+
 ## 验证
 
 ```powershell

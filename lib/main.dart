@@ -196,24 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
               ),
               const SizedBox(height: 14),
-              Wrap(
-                spacing: 14,
-                runSpacing: 14,
-                children: const [
-                  _FeatureCard(
-                      icon: Icons.phone_iphone_rounded,
-                      title: '一次开发',
-                      detail: '同时支持 iOS 与 Android'),
-                  _FeatureCard(
-                      icon: Icons.bolt_rounded,
-                      title: '快速启动',
-                      detail: '轻量、流畅、响应迅速'),
-                  _FeatureCard(
-                      icon: Icons.palette_outlined,
-                      title: '精美界面',
-                      detail: '为你的想法留下好印象'),
-                ],
-              ),
+              const _FeatureGrid(),
               const SizedBox(height: 28),
               Center(
                 child: Text(
@@ -230,6 +213,56 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+}
+
+class _FeatureGrid extends StatelessWidget {
+  const _FeatureGrid();
+
+  static const _features = [
+    _FeatureData(Icons.phone_iphone_rounded, '一次开发', '同时支持 iOS 与 Android'),
+    _FeatureData(Icons.bolt_rounded, '快速启动', '轻量、流畅、响应迅速'),
+    _FeatureData(Icons.palette_outlined, '精美界面', '为你的想法留下好印象'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = constraints.maxWidth >= 900
+            ? 3
+            : constraints.maxWidth >= 560
+                ? 2
+                : 1;
+        const gap = 14.0;
+        final cardWidth =
+            (constraints.maxWidth - gap * (columns - 1)) / columns;
+
+        return Wrap(
+          spacing: gap,
+          runSpacing: gap,
+          children: [
+            for (final feature in _features)
+              SizedBox(
+                width: cardWidth,
+                child: _FeatureCard(
+                  icon: feature.icon,
+                  title: feature.title,
+                  detail: feature.detail,
+                ),
+              ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _FeatureData {
+  const _FeatureData(this.icon, this.title, this.detail);
+
+  final IconData icon;
+  final String title;
+  final String detail;
 }
 
 class _FeatureCard extends StatelessWidget {
