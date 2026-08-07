@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Hello World</string>
+    <string name="automation_service_label">Hello World 自动化</string>
+    <string name="automation_service_description">允许在您手动启用后执行配置好的触控手势，并显示可关闭的悬浮控制球。</string>
+</resources>

@@ -28,6 +28,18 @@ python -m http.server 8080 --directory build\web
 - iOS 工程位于 `ios/`。生成 IPA 必须在 macOS 上安装 Xcode，并配置 Apple 开发者签名；Windows 不能直接编译或签名 IPA。
 - `windows/` 和 `web/` 已生成，可分别用于 Windows 桌面和浏览器运行。Windows 桌面构建还需要 Visual Studio 的“Desktop development with C++”工作负载。
 
+## Android 悬浮球与连点
+
+Android APK 包含一个需要用户主动授权的无障碍自动化服务。进入首页的“打开 Android 自动化”后：
+
+1. 打开 Android 系统无障碍设置并启用“Hello World 自动化”。
+2. 可选开启悬浮控制球；悬浮球可拖动，点击可开始或停止。
+3. 添加最多 10 个位置。横向和纵向位置均使用屏幕尺寸的千分比，便于适配不同设备和横竖屏。
+4. 每个位置可设置每秒 1–10 次频率和 1–10 优先级。
+5. 点击“保存并开始连点”。
+
+该功能仅在用户明确启用无障碍服务后运行，应用不会绕过 Android 系统授权。请仅用于本人设备的辅助操作和软件测试，并遵守第三方应用的使用规则。
+
 ## 使用 GitHub Actions 生成 iOS IPA
 
 推送到 `main` 分支、提交面向 `main` 的 Pull Request，或在 GitHub 的 Actions 页面手动运行 `Build multi-platform app packages`，都会在 GitHub 的 Runner 上并行构建 iOS、Android、Windows 和 macOS。

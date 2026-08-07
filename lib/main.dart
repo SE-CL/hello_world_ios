@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -182,6 +184,23 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(16)),
                           ),
                         ),
+                        if (!kIsWeb &&
+                            defaultTargetPlatform ==
+                                TargetPlatform.android) ...[
+                          const SizedBox(height: 12),
+                          TextButton.icon(
+                            onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => const AutomationPage(),
+                              ),
+                            ),
+                            icon: const Icon(Icons.touch_app_rounded),
+                            label: const Text('打开 Android 自动化'),
+                            style: TextButton.styleFrom(
+                              foregroundColor: Colors.white,
+                            ),
+                          ),
+                        ],
                       ],
                     ),
                   ],
@@ -303,4 +322,294 @@ class _FeatureCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class AutomationPage extends StatefulWidget {
+  const AutomationPage({super.key});
+
+  @override
+  State<AutomationPage> createState() => _AutomationPageState();
+}
+
+class _AutomationPageState extends State<AutomationPage>
+    with WidgetsBindingObserver {
+  static const _channel = MethodChannel('com.secl.hello_world_ios/automation');
+
+  var _overlayEnabled = false;
+  var _serviceEnabled = false;
+  var _running = false;
+  final List<_AutomationPoint> _points = [
+    const _AutomationPoint(x: 500, y: 500, rate: 1, priority: 5),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _refreshStatus();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _refreshStatus();
+    }
+  }
+
+  Future<void> _refreshStatus() async {
+    final result = await _channel.invokeMapMethod<String, dynamic>('getStatus');
+    if (!mounted || result == null) return;
+    setState(() {
+      _serviceEnabled = result['serviceEnabled'] == true;
+      _overlayEnabled = result['overlayEnabled'] == true;
+      _running = result['running'] == true;
+    });
+  }
+
+  Future<void> _saveConfiguration() {
+    return _channel.invokeMethod<void>(
+      'saveConfiguration',
+      _points.map((point) => point.toMap()).toList(),
+    );
+  }
+
+  Future<void> _setOverlayEnabled(bool enabled) async {
+    await _channel.invokeMethod<void>('setOverlayEnabled', enabled);
+    await _refreshStatus();
+  }
+
+  Future<void> _startOrStop() async {
+    if (!_serviceEnabled) {
+      await _channel.invokeMethod<void>('openAccessibilitySettings');
+      return;
+    }
+    if (_running) {
+      await _channel.invokeMethod<void>('stopAutoClick');
+    } else {
+      await _saveConfiguration();
+      await _channel.invokeMethod<void>('startAutoClick');
+    }
+    await _refreshStatus();
+  }
+
+  void _updatePoint(int index, _AutomationPoint point) {
+    setState(() => _points[index] = point);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Android 自动化')),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text('使用说明',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w800)),
+                    const SizedBox(height: 8),
+                    const Text(
+                        '先在系统设置中手动启用无障碍服务。坐标使用屏幕宽高的千分比，旋转屏幕时会自动按当前尺寸换算。'),
+                    const SizedBox(height: 12),
+                    FilledButton.icon(
+                      onPressed: () => _channel
+                          .invokeMethod<void>('openAccessibilitySettings'),
+                      icon: Icon(_serviceEnabled
+                          ? Icons.check_circle_outline
+                          : Icons.settings_accessibility),
+                      label: Text(_serviceEnabled ? '无障碍服务已启用' : '前往启用无障碍服务'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            SwitchListTile.adaptive(
+              title: const Text('悬浮控制球'),
+              subtitle: const Text('显示在其他应用上层，点击可开始或停止连点'),
+              value: _overlayEnabled,
+              onChanged: _serviceEnabled ? _setOverlayEnabled : null,
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Text('连点位置（${_points.length}/10）',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w800)),
+                const Spacer(),
+                IconButton(
+                  tooltip: '添加位置',
+                  onPressed: _points.length < 10
+                      ? () => setState(() => _points.add(const _AutomationPoint(
+                          x: 500, y: 500, rate: 1, priority: 5)))
+                      : null,
+                  icon: const Icon(Icons.add_circle_outline),
+                ),
+              ],
+            ),
+            for (var index = 0; index < _points.length; index++)
+              _PointEditor(
+                index: index,
+                point: _points[index],
+                canRemove: _points.length > 1,
+                onChanged: (point) => _updatePoint(index, point),
+                onRemove: () => setState(() => _points.removeAt(index)),
+              ),
+            const SizedBox(height: 18),
+            FilledButton.icon(
+              onPressed: _startOrStop,
+              icon: Icon(_running
+                  ? Icons.stop_circle_outlined
+                  : Icons.play_circle_outline),
+              label: Text(_running ? '停止连点' : '保存并开始连点'),
+              style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(52)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PointEditor extends StatelessWidget {
+  const _PointEditor({
+    required this.index,
+    required this.point,
+    required this.canRemove,
+    required this.onChanged,
+    required this.onRemove,
+  });
+
+  final int index;
+  final _AutomationPoint point;
+  final bool canRemove;
+  final ValueChanged<_AutomationPoint> onChanged;
+  final VoidCallback onRemove;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 12, 8, 16),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text('位置 ${index + 1}',
+                    style: const TextStyle(fontWeight: FontWeight.w800)),
+                const Spacer(),
+                IconButton(
+                    onPressed: canRemove ? onRemove : null,
+                    icon: const Icon(Icons.delete_outline)),
+              ],
+            ),
+            _PointSlider(
+              label: '横向位置',
+              value: point.x,
+              suffix: '‰',
+              onChanged: (value) => onChanged(point.copyWith(x: value)),
+            ),
+            _PointSlider(
+              label: '纵向位置',
+              value: point.y,
+              suffix: '‰',
+              onChanged: (value) => onChanged(point.copyWith(y: value)),
+            ),
+            _PointSlider(
+              label: '频率',
+              value: point.rate,
+              min: 1,
+              max: 10,
+              suffix: ' 次/秒',
+              onChanged: (value) => onChanged(point.copyWith(rate: value)),
+            ),
+            _PointSlider(
+              label: '优先级',
+              value: point.priority,
+              min: 1,
+              max: 10,
+              suffix: '',
+              onChanged: (value) => onChanged(point.copyWith(priority: value)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PointSlider extends StatelessWidget {
+  const _PointSlider({
+    required this.label,
+    required this.value,
+    required this.suffix,
+    required this.onChanged,
+    this.min = 0,
+    this.max = 1000,
+  });
+
+  final String label;
+  final int value;
+  final String suffix;
+  final ValueChanged<int> onChanged;
+  final int min;
+  final int max;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [Text(label), const Spacer(), Text('$value$suffix')],
+        ),
+        Slider(
+          value: value.toDouble(),
+          min: min.toDouble(),
+          max: max.toDouble(),
+          divisions: max - min,
+          onChanged: (value) => onChanged(value.round()),
+        ),
+      ],
+    );
+  }
+}
+
+class _AutomationPoint {
+  const _AutomationPoint(
+      {required this.x,
+      required this.y,
+      required this.rate,
+      required this.priority});
+
+  final int x;
+  final int y;
+  final int rate;
+  final int priority;
+
+  _AutomationPoint copyWith({int? x, int? y, int? rate, int? priority}) {
+    return _AutomationPoint(
+      x: x ?? this.x,
+      y: y ?? this.y,
+      rate: rate ?? this.rate,
+      priority: priority ?? this.priority,
+    );
+  }
+
+  Map<String, int> toMap() =>
+      {'x': x, 'y': y, 'rate': rate, 'priority': priority};
 }
