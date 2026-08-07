@@ -1,4 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class VisionOcrService {
+  static const _channel = MethodChannel('com.secl.hello_world_ios/vision');
+  Future<List<String>> recognize(Uint8List jpegBytes) async {
+    final result = await _channel.invokeMethod<List<dynamic>>(
+      'recognizeDigits',
+      Uint8List.fromList(jpegBytes),
+    );
+    return (result ?? const []).cast<String>();
+  }
+}
 
 void main() => runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: CalculatorPage()));
 
