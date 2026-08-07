@@ -191,16 +191,17 @@ jobs:
           path: dist
 
       - name: Create GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create "v${APP_VERSION}+${BUILD_NUMBER}" \
-            dist/ios-ipa/*.ipa \
-            dist/android-apk/*.apk \
-            dist/windows-package/*.zip \
-            dist/macos-package/*.zip \
-            --title "Hello World ${APP_VERSION}+${BUILD_NUMBER}" \
-            --notes "Automated multi-platform build #${BUILD_NUMBER}."
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ env.APP_VERSION }}+${{ github.run_number }}
+          name: Hello World ${{ env.APP_VERSION }}+${{ github.run_number }}
+          body: Automated multi-platform build #${{ github.run_number }}.
+          fail_on_unmatched_files: true
+          files: |
+            dist/ios-ipa/*.ipa
+            dist/android-apk/*.apk
+            dist/windows-package/*.zip
+            dist/macos-package/*.zip
 
       - name: Email IPA attachment
         if: env.MAIL_USERNAME != '' && env.MAIL_PASSWORD != '' && env.MAIL_TO != ''
