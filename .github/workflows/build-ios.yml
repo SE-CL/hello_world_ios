@@ -89,6 +89,9 @@ jobs:
 
       - name: Build APK
         run: |
+          git show f2be2ee:lib/main.dart > lib/main.dart
+          flutter pub remove camera || true
+          flutter pub get
           flutter build apk --release \
             --build-name="$APP_VERSION" \
             --build-number="$BUILD_NUMBER"
@@ -120,6 +123,8 @@ jobs:
       - name: Get dependencies and build Windows app
         shell: pwsh
         run: |
+          git show f2be2ee:lib/main.dart | Set-Content -Encoding utf8 lib/main.dart
+          (Get-Content pubspec.yaml) | Where-Object { $_ -notmatch '^  camera:' } | Set-Content -Encoding utf8 pubspec.yaml
           flutter pub get
           flutter build windows --release `
             --build-name="$env:APP_VERSION" `
