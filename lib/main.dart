@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
+import 'package:image/image.dart' as img;
 
 class VisionOcrService {
   static const _channel = MethodChannel('com.secl.hello_world_ios/vision');
@@ -59,5 +60,5 @@ class _CameraOcrPageState extends State<CameraOcrPage> {
   Future<void> _start() async { final cameras=await availableCameras(); if(cameras.isEmpty)return; controller=CameraController(cameras.first, ResolutionPreset.high, enableAudio:false); await controller!.initialize(); if(mounted)setState(()=>ready=true); }
   @override void dispose(){controller?.dispose(); super.dispose();}
   @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:const Text('相机实时识别')), body:!ready?const Center(child:CircularProgressIndicator()):Stack(fit:StackFit.expand,children:[CameraPreview(controller!), Center(child:Container(width:260,height:180,decoration:BoxDecoration(border:Border.all(color:Colors.white,width:3),color:Colors.transparent))), Positioned(top:24,left:20,right:20,child:ColoredBox(color:Colors.black54,child:Padding(padding:const EdgeInsets.all(10),child:Text(recognized,style:const TextStyle(color:Colors.white,fontSize:16))))), Positioned(bottom:24,left:20,right:20,child:FilledButton.icon(onPressed:busy?null:_sample,icon:busy?const SizedBox(width:18,height:18,child:CircularProgressIndicator()):const Icon(Icons.document_scanner),label:const Text('识别当前框')))]);
-  Future<void> _sample() async { if(DateTime.now().difference(last).inMilliseconds<250||busy)return; last=DateTime.now(); setState(()=>busy=true); try { final file=await controller!.takePicture(); final bytes=await File(file.path).readAsBytes(); final values=await VisionOcrService().recognize(bytes); if(mounted)setState(()=>recognized=values.isEmpty?'未识别到数字':values.join(' · ')); } catch (e) { if(mounted)setState(()=>recognized='识别失败: $e'); } finally { if(mounted)setState(()=>busy=false); } }
+  Future<void> _sample() async { if(DateTime.now().difference(last).inMilliseconds<250||busy)return; last=DateTime.now(); setState(()=>busy=true); try { final file=await controller!.takePicture(); final source=img.decodeImage(await File(file.path).readAsBytes()); if(source==null)throw StateError('无法读取图像'); final w=(source.width*0.72).round(), h=(source.height*0.48).round(); final cropped=img.copyCrop(source,x:(source.width-w)~/2,y:(source.height-h)~/2,width:w,height:h); final bytes=Uint8List.fromList(img.encodeJpg(cropped,quality:88)); final values=await VisionOcrService().recognize(bytes); if(mounted)setState(()=>recognized=values.isEmpty?'未识别到数字':values.join(' · ')); } catch (e) { if(mounted)setState(()=>recognized='识别失败: $e'); } finally { if(mounted)setState(()=>busy=false); } }
 }
