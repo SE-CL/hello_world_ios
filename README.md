@@ -30,9 +30,9 @@ python -m http.server 8080 --directory build\web
 
 ## 使用 GitHub Actions 生成 iOS IPA
 
-推送到 `main` 分支、提交面向 `main` 的 Pull Request，或在 GitHub 的 Actions 页面手动运行 `Build unsigned iOS IPA`，都会在 GitHub 的 macOS Runner 上执行 iOS 构建。
+推送到 `main` 分支、提交面向 `main` 的 Pull Request，或在 GitHub 的 Actions 页面手动运行 `Build multi-platform app packages`，都会在 GitHub 的 Runner 上并行构建 iOS、Android、Windows 和 macOS。
 
-构建成功后，在对应的 Actions Run 页面下载名为 `hello_world_ios-unsigned-ipa` 的 Artifact。里面包含 `hello_world_ios-unsigned.ipa`。
+构建成功后，可在对应的 GitHub Release 下载 IPA、APK、Windows ZIP 和 macOS ZIP；Actions 页面也会保留 14 天的临时 Artifact。
 
 该文件没有 Apple 签名，可用于确认 iOS 工程能够编译，但不能直接安装到普通 iPhone 或 iPad。要生成可安装的 IPA，需要 Apple Developer 证书、Provisioning Profile 和对应的 Bundle Identifier，并在工作流中配置签名。
 
@@ -40,7 +40,7 @@ python -m http.server 8080 --directory build\web
 
 ### 自动版本、Release 与邮件
 
-每次推送到 `main`，工作流会使用 GitHub Actions 的递增运行序号作为 iOS 构建号，并创建 GitHub Release，例如 `v1.0.0+2`。Release 会附带对应的无签名 IPA。
+每次推送到 `main`，工作流会使用 GitHub Actions 的递增运行序号作为构建号，并创建 GitHub Release，例如 `v1.0.0+2`。Release 会附带无签名 IPA、APK、Windows ZIP 和 macOS ZIP。
 
 如需将 IPA 作为邮件附件自动发送，在仓库的 `Settings` → `Secrets and variables` → `Actions` 创建以下 Secrets：
 
