@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
+import 'dart:io';
 
 class VisionOcrService {
   static const _channel = MethodChannel('com.secl.hello_world_ios/vision');
@@ -53,10 +54,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
 class CameraOcrPage extends StatefulWidget { const CameraOcrPage({super.key}); @override State<CameraOcrPage> createState()=>_CameraOcrPageState(); }
 class _CameraOcrPageState extends State<CameraOcrPage> {
-  CameraController? controller; bool ready=false; DateTime last=DateTime.fromMillisecondsSinceEpoch(0);
+  CameraController? controller; bool ready=false; bool busy=false; DateTime last=DateTime.fromMillisecondsSinceEpoch(0); String recognized='等待识别';
   @override void initState(){super.initState(); _start();}
   Future<void> _start() async { final cameras=await availableCameras(); if(cameras.isEmpty)return; controller=CameraController(cameras.first, ResolutionPreset.high, enableAudio:false); await controller!.initialize(); if(mounted)setState(()=>ready=true); }
   @override void dispose(){controller?.dispose(); super.dispose();}
-  @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:const Text('相机实时识别')), body:!ready?const Center(child:CircularProgressIndicator()):Stack(fit:StackFit.expand,children:[CameraPreview(controller!), Center(child:Container(width:260,height:180,decoration:BoxDecoration(border:Border.all(color:Colors.white,width:3),color:Colors.transparent))), Positioned(bottom:24,left:20,right:20,child:FilledButton.icon(onPressed:_sample,icon:const Icon(Icons.document_scanner),label:const Text('识别当前框')))]);
-  Future<void> _sample() async { if(DateTime.now().difference(last).inMilliseconds<250)return; last=DateTime.now(); final file=await controller!.takePicture(); if(mounted)ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('已采样: ${file.path}'))); }
+  @override Widget build(BuildContext context)=>Scaffold(appBar:AppBar(title:const Text('相机实时识别')), body:!ready?const Center(child:CircularProgressIndicator()):Stack(fit:StackFit.expand,children:[CameraPreview(controller!), Center(child:Container(width:260,height:180,decoration:BoxDecoration(border:Border.all(color:Colors.white,width:3),color:Colors.transparent))), Positioned(top:24,left:20,right:20,child:ColoredBox(color:Colors.black54,child:Padding(padding:const EdgeInsets.all(10),child:Text(recognized,style:const TextStyle(color:Colors.white,fontSize:16))))), Positioned(bottom:24,left:20,right:20,child:FilledButton.icon(onPressed:busy?null:_sample,icon:busy?const SizedBox(width:18,height:18,child:CircularProgressIndicator()):const Icon(Icons.document_scanner),label:const Text('识别当前框')))]);
+  Future<void> _sample() async { if(DateTime.now().difference(last).inMilliseconds<250||busy)return; last=DateTime.now(); setState(()=>busy=true); try { final file=await controller!.takePicture(); final bytes=await File(file.path).readAsBytes(); final values=await VisionOcrService().recognize(bytes); if(mounted)setState(()=>recognized=values.isEmpty?'未识别到数字':values.join(' · ')); } catch (e) { if(mounted)setState(()=>recognized='识别失败: $e'); } finally { if(mounted)setState(()=>busy=false); } }
 }
