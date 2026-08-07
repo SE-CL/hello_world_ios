@@ -1,0 +1,9 @@
+Package: com.secl.screencalculator
+Name: Screen Calculator
+Version: 0.1.0
+Architecture: iphoneos-arm
+Description: User-controlled visible calculator overlay.
+Maintainer: SE-CL
+Author: SE-CL
+Section: Utilities
+Depends: mobilesubstrate
