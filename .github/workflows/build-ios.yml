@@ -174,9 +174,42 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  build-tweak:
+    name: Build Theos tweak
+    runs-on: macos-latest
+    timeout-minutes: 30
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Theos toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          brew install ldid
+          git clone --depth 1 --recursive https://github.com/theos/theos.git "$RUNNER_TEMP/theos"
+          git clone --depth 1 https://github.com/theos/sdks.git "$RUNNER_TEMP/theos/sdks"
+          echo "THEOS=$RUNNER_TEMP/theos" >> "$GITHUB_ENV"
+          echo "$RUNNER_TEMP/theos/bin" >> "$GITHUB_PATH"
+      - name: Build plugin package
+        shell: bash
+        working-directory: plugin/ScreenCalculator
+        run: |
+          make package FINALPACKAGE=1
+          mkdir -p "$GITHUB_WORKSPACE/build/plugin"
+          cp packages/*.deb "$GITHUB_WORKSPACE/build/plugin/" || true
+          find .theos/obj -name '*.dylib' -exec cp {} "$GITHUB_WORKSPACE/build/plugin/" \; || true
+          cp -R . "$GITHUB_WORKSPACE/build/plugin/source"
+      - name: Upload plugin package
+        uses: actions/upload-artifact@v4
+        with:
+          name: jailbreak-plugin
+          path: build/plugin
+          if-no-files-found: warn
+          retention-days: 14
+
   release:
     name: Publish version
-    needs: [build-ios, build-android, build-windows, build-macos]
+    needs: [build-ios, build-android, build-windows, build-macos, build-tweak]
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     env:
