@@ -15,6 +15,12 @@ import Vision
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     let channel = FlutterMethodChannel(name: "com.secl.hello_world_ios/vision", binaryMessenger: engineBridge.binaryMessenger)
     channel.setMethodCallHandler { call, result in
+      if call.method == "readLatestFrame" {
+        guard let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.secl.hello_world_ios") else { result(nil); return }
+        let url = container.appendingPathComponent("latest-frame.jpg")
+        result((try? Data(contentsOf: url)).map { FlutterStandardTypedData(bytes: $0) })
+        return
+      }
       guard call.method == "recognizeDigits", let data = call.arguments as? FlutterStandardTypedData,
             let image = UIImage(data: data.data), let cgImage = image.cgImage else {
         result(FlutterMethodNotImplemented); return

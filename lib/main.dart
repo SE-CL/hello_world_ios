@@ -10,6 +10,12 @@ class VisionOcrService {
     );
     return (result ?? const []).cast<String>();
   }
+
+  Future<List<String>> pollLatestFrame() async {
+    final frame = await _channel.invokeMethod<Uint8List>('readLatestFrame');
+    if (frame == null || frame.isEmpty) return const [];
+    return recognize(frame);
+  }
 }
 
 void main() => runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: CalculatorPage()));
