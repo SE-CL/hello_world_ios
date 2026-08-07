@@ -93,6 +93,7 @@ class CameraPage extends StatefulWidget {
 
 class _CameraPageState extends State<CameraPage> {
   CameraController? controller;
+  String? error;
 
   @override
   void initState() {
@@ -101,15 +102,15 @@ class _CameraPageState extends State<CameraPage> {
   }
 
   Future<void> _init() async {
-    final cameras = await availableCameras();
-    if (cameras.isEmpty) return;
-    final value = CameraController(
-      cameras.first,
-      ResolutionPreset.high,
-      enableAudio: false,
-    );
-    await value.initialize();
-    if (mounted) setState(() => controller = value);
+    try {
+      final cameras = await availableCameras();
+      if (cameras.isEmpty) throw StateError('No camera available');
+      final value = CameraController(cameras.first, ResolutionPreset.high, enableAudio: false);
+      await value.initialize();
+      if (mounted) setState(() => controller = value);
+    } catch (exception) {
+      if (mounted) setState(() => error = exception.toString());
+    }
   }
 
   @override
@@ -123,7 +124,9 @@ class _CameraPageState extends State<CameraPage> {
     final camera = controller;
     return Scaffold(
       appBar: AppBar(title: const Text('Camera OCR')),
-      body: camera == null
+      body: error != null
+          ? Center(child: Padding(padding: const EdgeInsets.all(24), child: Text('Camera unavailable: $error')))
+          : camera == null
           ? const Center(child: CircularProgressIndicator())
           : Stack(
               fit: StackFit.expand,
