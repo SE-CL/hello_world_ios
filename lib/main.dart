@@ -380,6 +380,9 @@ class _AutomationPageState extends State<AutomationPage>
   }
 
   Future<void> _setOverlayEnabled(bool enabled) async {
+    if (enabled) {
+      await _saveConfiguration();
+    }
     await _channel.invokeMethod<void>('setOverlayEnabled', enabled);
     await _refreshStatus();
   }
