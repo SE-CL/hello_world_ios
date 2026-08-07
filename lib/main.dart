@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:camera/camera.dart';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 
 class VisionOcrService {
